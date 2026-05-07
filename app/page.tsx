@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { supabase } from "@/lib/supabase";
 
 export default function Home() {
   return (
@@ -99,5 +100,15 @@ export default function Home() {
   </div>
 </footer>
     </main>
+
   );
 }
+async function testConnection() {
+  const { data, error } = await supabase
+    .from("audits")
+    .select("*");
+
+  console.log(data, error);
+}
+
+testConnection();
