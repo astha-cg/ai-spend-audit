@@ -39,3 +39,46 @@
 - Implement form validation
 - Add localStorage persistence for saved form state
 - Start building the audit engine logic and pricing dataset
+
+## Day 2 — 2026-05-08
+
+**Hours worked:** 6
+
+**What I did:**
+- Created the complete audit input page using Next.js and Tailwind CSS
+- Built responsive form UI for collecting AI tool usage information
+- Added dropdown selection system for different AI platforms and plans
+- Implemented form state management using React hooks
+- Added fields for:
+  - AI tool selection
+  - subscription plan
+  - monthly spending
+  - team size
+  - primary use case
+- Implemented localStorage persistence to save form progress automatically
+- Added logic to reload saved form data after page refresh
+- Added client-side form validation for required fields
+- Created placeholder results page for audit output flow
+- Implemented routing between audit form and results page
+- Improved form styling with modern dark SaaS-inspired UI design
+- Organized project structure using separate data and utility folders
+
+**What I learned:**
+- Better understanding of React state management using useState and useEffect
+- How localStorage can improve user experience by preserving form state
+- Improved understanding of client-side routing in Next.js App Router
+- Importance of reusable data structures for scalable frontend architecture
+- Learned how responsive form design affects usability across devices
+
+**Blockers / what I'm stuck on:**
+- Initially faced confusion with React client components and hook usage
+- Needed additional debugging for localStorage synchronization after refresh
+- Still planning the best architecture for scalable recommendation logic
+
+**Plan for tomorrow:**
+- Build the complete audit engine and pricing calculation system
+- Add recommendation logic for AI tool optimization
+- Generate dynamic audit results
+- Create savings calculation functionality
+- Add yearly savings estimation
+- Improve overall user experience and interactions
