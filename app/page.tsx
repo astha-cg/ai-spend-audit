@@ -12,11 +12,11 @@ export default function Home() {
     {/* Logo */}
     <div className="flex items-center gap-3">
       <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-blue-500 font-bold text-white">
-        AI
+        SI
       </div>
 
       <div>
-        <h1 className="text-lg font-bold">AI Spend Audit</h1>
+        <h1 className="text-lg font-bold">Spendit</h1>
         <p className="text-xs text-gray-400">
           by Credex
         </p>
@@ -36,25 +36,25 @@ export default function Home() {
 
       {/* Hero Section */}
 <section className="px-6 py-24">
-  <div className="mx-auto flex max-w-7xl flex-col items-center gap-16 md:flex-row">
+  <div className="mx-auto flex max-w-7xl flex-col items-center gap-16 md:flex-row md:gap-32">
     
     {/* Left Content */}
-    <div className="flex-1 text-center md:text-left">
+    <div className="flex-1 text-center md:text-left ">
       <p className="mb-4 text-sm uppercase tracking-[0.3em] text-gray-400">
         Free AI Cost Optimization Tool
       </p>
 
-      <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+      <h1 className="text-5xl md:text-7xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
         Stop Overspending on AI Tools
       </h1>
 
-      <p className="mt-6 text-lg text-gray-300 md:text-xl">
+      <p className="mt-6 text-lg text-gray-300 md:text-xl max-w-2xl mx-auto md:mx-0">
         Get a free audit of your AI stack in 60 seconds.
         Discover cheaper plans, better alternatives,
         and hidden savings opportunities.
       </p>
 
-      <div className="mt-10 flex flex-col sm:flex-row items-center md:items-start gap-4">
+      <div className="mt-10 flex flex-col sm:flex-row items-center md:items-start gap-4 justify-center md:justify-start">
         <Link
           href="/audit"
           className="rounded-xl bg-white px-8 py-4 text-lg font-semibold text-black hover:bg-gray-200 transition"
