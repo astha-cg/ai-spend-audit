@@ -111,7 +111,7 @@ useEffect(() => {
         value={teamSize}
         onChange={(e) => setTeamSize(e.target.value)}
         placeholder="5"
-        className="w-full rounded-xl bg-black/40 border border-white/10 p-4"
+        className="w-full rounded-xl bg-black/40 p-4 outline-none transition-all duration-300 focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20"
       />
     </div>
 
@@ -131,15 +131,29 @@ useEffect(() => {
 
     {/* Submit Button */}
     <button
-        onClick={() => {
-        if (!tool || !monthlySpend || !teamSize) {
+       onClick={() => {
+
+    if (!tool || !monthlySpend || !teamSize) {
         alert("Please fill all required fields");
         return;
     }
 
+    const auditData = {
+        tool,
+        plan,
+        monthlySpend,
+        teamSize,
+        useCase,
+    };
+
+    localStorage.setItem(
+        "audit-data",
+        JSON.stringify(auditData)
+    );
+
     router.push("/results");
     }}
-        className="rounded-xl bg-white px-8 py-4 text-lg font-semibold text-black transition hover:bg-gray-200 text-center w-cente">
+        className=" rounded-xl bg-white px-8 py-4 text-lg font-semibold text-black transition-all duration-300 hover:scale-[1.02] hover:bg-gray-200 active:scale-[0.98]">
     Analyze My AI Spend
     </button>
 
