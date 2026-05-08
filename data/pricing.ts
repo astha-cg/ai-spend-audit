@@ -1,11 +1,11 @@
 export const pricingData = {
-  Chatgpt: {
+ ChatGPT: {
     plus: 20,
     team: 30,
     enterprise: 60,
   },
 
-  cursor: {
+  Cursor: {
     pro: 20,
     business: 40,
   },

@@ -21,8 +21,8 @@ export default function ResultsPage() {
       const auditResult = generateAudit({
         tool: parsedData.tool,
         plan: parsedData.plan,
-        monthlySpend: Number(parsedData.monthlySpend),
-        teamSize: Number(parsedData.teamSize),
+        monthlySpend: parseFloat(parsedData.monthlySpend || "0"),
+        teamSize: parseInt(parsedData.teamSize || "0"),
         useCase: parsedData.useCase,
       });
 
@@ -98,7 +98,7 @@ export default function ResultsPage() {
               </h2>
             </div>
             {result.estimatedSavings > 50 && (
-            <div className="mt-8 rounded-2xl bg-purple-500/10 border border-purple-500/20 p-6">
+            <div className="md:col-span-2mt-8 rounded-2xl bg-purple-500/10 border border-purple-500/20 p-6">
 
             <h3 className="text-2xl font-bold">
                 Large Savings Opportunity Detected
@@ -111,7 +111,7 @@ export default function ResultsPage() {
         </div>
         )}
         {result.estimatedSavings === 0 && (
-        <div className="mt-8 rounded-2xl border border-green-500/20 bg-green-500/10 p-6">
+        <div className="md:col-span-2 mt-8 rounded-2xl border border-green-500/20 bg-green-500/10 p-6">
 
         <h3 className="text-2xl font-bold text-green-400">
         Your AI Spending Looks Optimized
@@ -124,7 +124,7 @@ export default function ResultsPage() {
         </div>
         )}
         
-            <div className="mt-8 rounded-2xl bg-green-500/10 border border-green-500/20 p-6">
+            <div className="md:col-span-2 mt-8 rounded-2xl bg-green-500/10 border border-green-500/20 p-6">
 
             <p className="text-sm text-green-300">
                  Estimated Annual Savings

@@ -13,15 +13,18 @@ type AuditResult = {
 };
 
 export function generateAudit(
+ 
   input: AuditInput
 ): AuditResult {
+   
 
   const { tool, plan, monthlySpend, teamSize, useCase } = input;
+  
 
   // ChatGPT Enterprise downgrade
   if (
     tool === "ChatGPT" &&
-    plan === "Enterprise" &&
+    plan === "enterprise" &&
     teamSize < 10
   ) {
     return {
@@ -35,7 +38,7 @@ export function generateAudit(
   // Cursor Business downgrade
   if (
     tool === "Cursor" &&
-    plan === "Business" &&
+    plan === "business" &&
     teamSize <= 5
   ) {
     return {
