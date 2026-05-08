@@ -111,7 +111,7 @@ export default function ResultsPage() {
         </div>
         )}
         {result.estimatedSavings === 0 && (
-    <div className="mt-8 rounded-2xl border border-green-500/20 bg-green-500/10 p-6">
+        <div className="mt-8 rounded-2xl border border-green-500/20 bg-green-500/10 p-6">
 
         <h3 className="text-2xl font-bold text-green-400">
         Your AI Spending Looks Optimized
@@ -121,10 +121,9 @@ export default function ResultsPage() {
       Based on current analysis, your organization is already using a cost-efficient AI setup.
         </p>
 
-    </div>
-    )}
+        </div>
+        )}
         
-
             <div className="mt-8 rounded-2xl bg-green-500/10 border border-green-500/20 p-6">
 
             <p className="text-sm text-green-300">

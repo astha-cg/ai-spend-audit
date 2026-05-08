@@ -1,13 +1,13 @@
-export const pricing = {
-  ChatGPT: {
-    Plus: 20,
-    Team: 30,
-    Enterprise: 60,
+export const pricingData = {
+  Chatgpt: {
+    plus: 20,
+    team: 30,
+    enterprise: 60,
   },
 
-  Cursor: {
-    Pro: 20,
-    Business: 40,
+  cursor: {
+    pro: 20,
+    business: 40,
   },
 
   Claude: {
