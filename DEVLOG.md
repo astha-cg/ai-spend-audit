@@ -82,3 +82,47 @@
 - Create savings calculation functionality
 - Add yearly savings estimation
 - Improve overall user experience and interactions
+
+## Day 3 — 2026-05-09
+
+**Hours worked:** 8
+
+**What I did:**
+- Built the complete audit engine logic for AI spend analysis
+- Created centralized pricing dataset for multiple AI tools and plans
+- Implemented recommendation logic for identifying overspending scenarios
+- Added savings calculation system for monthly and yearly estimates
+- Created dynamic results page connected to audit form data
+- Implemented localStorage data flow between form and results pages
+- Added personalized recommendation cards based on user inputs
+- Added yearly savings calculation and high-savings opportunity alerts
+- Improved responsive layout for desktop and mobile devices
+- Added hover effects, transitions, focus states, and loading animations
+- Enhanced overall SaaS-style UI/UX consistency across pages
+- Added empty states and better feedback messaging for optimized plans
+- Started writing initial test structure for audit engine validation
+- Built AI-powered audit summary generation using OpenAI API integration and Next.js API routes. 
+- Added Supabase database integration to store audit records and implemented analytics cards for savings insights. 
+
+**What I learned:**
+- How to separate business logic into reusable utility files
+- Better understanding of state persistence using localStorage
+- How recommendation engines use rule-based optimization logic
+- Importance of responsive spacing and interaction feedback in frontend UX
+- How dynamic rendering works between pages in Next.js App Router
+- Improved understanding of scalable frontend architecture and data flow
+
+**Blockers / what I'm stuck on:**
+- Need to improve pricing logic to support more advanced optimization scenarios
+- Current recommendation engine is rule-based and still limited for complex use cases
+- Need to research better patterns for scalable audit calculation architecture
+- Still exploring best practices for frontend testing in Next.js
+
+**Plan for tomorrow:**
+- Add authentication system
+- Build downloadable audit reports
+- Add PDF export functionality
+- Improve dashboard and analytics visualization
+- Optimize overall UI polish and responsiveness
+- Prepare project for deployment
+- Improve performance and loading speed
