@@ -19,7 +19,11 @@ export function generateAudit(
    
 
   const { tool, plan, monthlySpend, teamSize, useCase } = input;
-  
+  const newCost = teamSize * 30;
+  const estimatedSavings = Math.max(
+  0,
+  monthlySpend - newCost
+    );
 
   // ChatGPT Enterprise downgrade
   if (
@@ -28,8 +32,8 @@ export function generateAudit(
     teamSize < 10
   ) {
     return {
-      recommendedPlan: "Team",
-      estimatedSavings: monthlySpend - 30,
+      recommendedPlan: "team",
+      estimatedSavings: monthlySpend - newCost,
       reason:
         "Enterprise plan may be unnecessary for small teams.",
     };

@@ -2,34 +2,100 @@
 
 import { useEffect, useState } from "react";
 import { generateAudit } from "@/lib/auditEngine";
+import { supabase } from "@/lib/supabase";
 
 export default function ResultsPage() {
 
   const [result, setResult] = useState<any>(null);
   const [formData, setFormData] = useState<any>(null);
+  const [summary, setSummary] = useState("");
+  const [loadingSummary, setLoadingSummary] = useState(true);
 
-  useEffect(() => {
+
+useEffect(() => {
+
+  async function fetchData() {
 
     const savedData = localStorage.getItem("audit-data");
 
-    if (savedData) {
-
-      const parsedData = JSON.parse(savedData);
-
-      setFormData(parsedData);
-
-      const auditResult = generateAudit({
-        tool: parsedData.tool,
-        plan: parsedData.plan,
-        monthlySpend: parseFloat(parsedData.monthlySpend || "0"),
-        teamSize: parseInt(parsedData.teamSize || "0"),
-        useCase: parsedData.useCase,
-      });
-
-      setResult(auditResult);
+    // No data found
+    if (!savedData) {
+      console.log("No audit data found");
+      return;
     }
 
-  }, []);
+    const parsedData = JSON.parse(savedData);
+
+    // Extra safety check
+    if (!parsedData) {
+      console.log("Parsed data is null");
+      return;
+    }
+
+    setFormData(parsedData);
+
+    const auditResult = generateAudit({
+      tool: parsedData.tool,
+      plan: parsedData.plan,
+      monthlySpend: Number(parsedData.monthlySpend),
+      teamSize: Number(parsedData.teamSize),
+      useCase: parsedData.useCase,
+    });
+
+    setResult(auditResult);
+
+    try {
+
+      // Generate AI Summary
+      const response = await fetch(
+        "/api/generate-summary",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...parsedData,
+            recommendedPlan:
+              auditResult.recommendedPlan,
+            estimatedSavings:
+              auditResult.estimatedSavings,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      setSummary(data.summary);
+
+      // Save to Supabase
+      await supabase.from("audits").insert([
+        {
+          company: parsedData.tool,
+          team_size: Number(parsedData.teamSize),
+          savings: auditResult.estimatedSavings,
+        },
+      ]);
+
+    } catch (error) {
+
+      console.error(error);
+
+      setSummary(
+        "Unable to generate AI summary."
+      );
+
+    } finally {
+
+      setLoadingSummary(false);
+
+    }
+  }
+
+  fetchData();
+
+}, []);
+    
 
   if (!result || !formData) {
     return (
@@ -38,6 +104,26 @@ export default function ResultsPage() {
       </main>
     );
   }
+  if (!formData) {
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-black text-white">
+
+      <div className="text-center">
+
+        <h1 className="text-4xl font-bold">
+          No Audit Data Found
+        </h1>
+
+        <p className="mt-4 text-gray-400">
+          Please complete the audit form first.
+        </p>
+
+      </div>
+
+    </main>
+  );
+}
+  
   const yearlySavings = result.estimatedSavings * 12;
 
   return (
@@ -52,6 +138,39 @@ export default function ResultsPage() {
         <p className="mt-4 text-gray-400">
           Personalized AI spend optimization report.
         </p>
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
+
+        <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+        <p className="text-sm text-gray-400">
+          Monthly Savings
+        </p>
+
+        <h2 className="mt-3 text-4xl font-bold text-green-400">
+          ${result.estimatedSavings}
+        </h2>
+        </div>
+
+        <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+        <p className="text-sm text-gray-400">
+          Annual Savings
+        </p>
+
+        <h2 className="mt-3 text-4xl font-bold text-green-400">
+          ${result.estimatedSavings * 12}
+        </h2>
+        </div>
+
+        <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+        <p className="text-sm text-gray-400">
+          Optimization Score
+        </p>
+
+        <h2 className="mt-3 text-4xl font-bold text-purple-400">
+           {result.estimatedSavings > 0 ? "72%" : "95%"}
+        </h2>
+      </div>
+
+    </div>
 
         {/* Results Card */}
         <div className="mt-10 rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition-all duration-300 hover:border-purple-500/30 hover:bg-white/[0.07]">
@@ -150,6 +269,24 @@ export default function ResultsPage() {
             </p>
 
           </div>
+          <div className="mt-8 rounded-3xl border border-purple-500/20 bg-purple-500/10 p-8">
+
+          <h3 className="text-2xl font-bold">
+            AI Generated Audit Summary
+          </h3>
+
+          {loadingSummary ? (
+            <p className="mt-4 text-gray-300">
+              Generating AI insights...
+            </p>
+          ) : (
+            <p className="mt-4 leading-8 text-gray-200">
+            {summary}
+          </p>
+          )}
+          
+
+        </div>
 
         </div>
 
