@@ -1,6 +1,6 @@
 ## Day 1 — 2026-05-07
 
-**Hours worked:** 6
+**Hours worked:** 8
 
 **What I did:**
 - Read and analyzed the complete Credex internship assignment requirements
@@ -126,3 +126,94 @@
 - Optimize overall UI polish and responsiveness
 - Prepare project for deployment
 - Improve performance and loading speed
+
+# Day 4- 2026-05-10
+
+**Hours worked:** 4
+
+
+## Progress Summary
+
+Today I focused on improving the frontend experience, authentication setup, deployment preparation, and overall UI consistency of the AI Spend Audit platform.
+
+---
+
+## Features Implemented
+
+### Authentication Setup
+- Enabled Email Authentication in Supabase
+- Configured authentication provider settings
+- Prepared project for secure user onboarding
+
+### UI/UX Improvements
+- Redesigned the landing page with a modern SaaS-inspired interface
+- Added glassmorphism cards and soft gradient glow backgrounds
+- Improved spacing, typography, and responsive layout
+- Unified design language across Landing, Audit, and Results pages
+
+### Audit Form Improvements
+- Redesigned audit form to match the landing page theme
+- Added:
+  - smooth transitions
+  - hover animations
+  - responsive inputs
+  - focus ring effects
+- Improved button interactions and overall usability
+
+### Results Page Redesign
+- Created premium dashboard-style audit result layout
+- Added:
+  - savings cards
+  - optimization score section
+  - AI-generated summary section
+  - recommendation panels
+- Improved readability and visual hierarchy
+
+### Theme System
+- Started implementing Light/Dark mode support
+- Added theme provider setup using `next-themes`
+- Built reusable theme toggle component
+
+### Deployment Preparation
+- Prepared project for Vercel deployment
+- Configured required environment variables:
+  - Supabase URL
+  - Supabase Anon Key
+  - OpenAI API Key
+
+---
+
+## Problems Faced
+
+### OpenAI API Quota Error
+- Encountered:
+  - `429 insufficient_quota`
+- Added fallback AI summary handling
+- Improved error handling for API failures
+
+### Vercel Deployment Issues
+- Fixed missing `package.json` / root directory problems
+- Verified Next.js project structure
+
+---
+
+## Technologies Used
+- Next.js
+- Tailwind CSS
+- Supabase
+- Framer Motion
+- next-themes
+- OpenAI API
+
+---
+
+## Outcome
+
+The project now has:
+- a modern SaaS-style interface
+- improved UX
+- responsive layouts
+- authentication support
+- deployment readiness
+- scalable frontend structure
+
