@@ -45,20 +45,27 @@ useEffect(() => {
 
   return (
 
-   <div className=" min-h-screen bg-gradient-to-br from-purple-900 via-[#090e1f] to-[#050816] text-blue px-6 py-12">
+   <div className="relative min-h-screen overflow-hidden bg-[#f6f4ef] px-6 py-16 text-black">
+    <div className="absolute inset-0 -z-10 overflow-hidden">
 
-  <div className="rounded-xl bg-white text-black p-8 max-w-3xl mx-auto">
+      <div className="absolute right-[-120px] top-[-100px] h-[500px] w-[500px] rounded-full bg-lime-300 blur-[120px] opacity-70" />
+
+      <div className="absolute left-[20%] top-[120px] h-[350px] w-[350px] rounded-full bg-emerald-200 blur-[120px] opacity-50" />
+
+    </div>
+
+  <div className="mx-auto max-w-4xl rounded-[40px] border border-white/40 bg-white/70 p-10 shadow-[0_20px_80px_rgba(0,0,0,0.08)] backdrop-blur-2xl">
 
     {/* Tool Selection */}
-    <div>
-      <label className="mb-2 block text-sm font-medium font-semibold">
+    <div className="mb-12">
+      <label className="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-black/80">
         AI Tool
       </label>
 
       <select
         value={tool}
         onChange={(e) => setTool(e.target.value)}
-        className="w-full rounded-xl bg-black/40 border border-white/10 p-4"
+        className="w-full rounded-2xl border border-black/10 bg-white/80 px-5 py-4 text-black shadow-sm outline-none transition focus:border-green-400 focus:ring-4 focus:ring-green-200"
       >
         <option value="">Select a tool</option>
 
@@ -72,7 +79,7 @@ useEffect(() => {
 
     {/* Plan */}
     <div>
-      <label className="mb-2 block text-sm font-medium font-semibold">
+      <label className="mb-3 block text-sm font-medium text-black/70">
         Plan
       </label>
 
@@ -81,13 +88,13 @@ useEffect(() => {
         value={plan}
         onChange={(e) => setPlan(e.target.value)}
         placeholder="e.g. Team"
-        className="w-full rounded-xl bg-black/40 border border-white/10 p-4"
+        className="w-full rounded-2xl border border-black/10 bg-white/80 px-5 py-4 text-black shadow-sm outline-none transition focus:border-green-400 focus:ring-4 focus:ring-green-200"
       />
     </div>
 
     {/* Monthly Spend */}
     <div>
-      <label className="mb-2 block text-sm font-medium font-semibold">
+      <label className="mb-3 block text-sm font-medium text-black/70">
         Monthly Spend ($)
       </label>
 
@@ -96,13 +103,13 @@ useEffect(() => {
         value={monthlySpend}
         onChange={(e) => setMonthlySpend(e.target.value)}
         placeholder="100"
-        className="w-full rounded-xl bg-black/40 border border-white/10 p-4"
+        className="w-full rounded-2xl border border-black/10 bg-white/80 px-5 py-4 text-black shadow-sm outline-none transition focus:border-green-400 focus:ring-4 focus:ring-green-200"
       />
     </div>
 
     {/* Team Size */}
     <div>
-      <label className="mb-2 block text-sm font-medium font-semibold">
+      <label className="mb-3 block text-sm font-medium text-black/70">
         Team Size
       </label>
 
@@ -111,13 +118,13 @@ useEffect(() => {
         value={teamSize}
         onChange={(e) => setTeamSize(e.target.value)}
         placeholder="5"
-        className="w-full rounded-xl bg-black/40 p-4 outline-none transition-all duration-300 focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20"
+        className="w-full rounded-2xl border border-black/10 bg-white/80 px-5 py-4 text-black shadow-sm outline-none transition focus:border-green-400 focus:ring-4 focus:ring-green-200"
       />
     </div>
 
     {/* Use Case */}
     <div>
-      <label className="mb-2 block text-sm font-medium font-semibold">
+      <label className="mb-3 block text-sm font-medium text-black/70">
         Primary Use Case
       </label>
 
@@ -125,7 +132,7 @@ useEffect(() => {
         value={useCase}
         onChange={(e) => setUseCase(e.target.value)}
         placeholder="Coding, writing, research, customer support..."
-        className="min-h-[120px] w-full rounded-xl bg-black/40 border border-white/10 p-4"
+        className="min-h-[120px] w-full rounded-2xl border border-black/10 bg-white/80 px-5 py-4 text-black shadow-sm outline-none transition focus:border-green-400 focus:ring-4 focus:ring-green-200"
       />
     </div>
 
@@ -153,7 +160,7 @@ useEffect(() => {
 
     router.push("/results");
     }}
-        className=" rounded-xl bg-white px-8 py-4 text-lg font-semibold text-black transition-all duration-300 hover:scale-[1.02] hover:bg-gray-200 active:scale-[0.98]">
+        className="mt-6 rounded-full bg-green-400 px-10 py-5 text-lg font-medium text-black shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-green-300 active:scale-[0.98]">
     Analyze My AI Spend
     </button>
 

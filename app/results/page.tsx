@@ -161,45 +161,53 @@ useEffect(() => {
 }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-black via-[#090e1f] to-[#050816] text-white px-4 py-12 md:px-6 md:py-16">
+    <main className="relative min-h-screen overflow-hidden bg-[#f6f4ef] px-4 py-12 text-black md:px-6 md:py-16">
+      <div className="absolute inset-0 -z-10 overflow-hidden">
 
-      <div className="mx-auto max-w-5xl">
+      <div className="absolute right-[-120px] top-[-100px] h-[500px] w-[500px] rounded-full bg-lime-300 blur-[130px] opacity-70" />
 
-        <h1 className="text-5xl font-bold">
+      <div className="absolute left-[10%] top-[250px] h-[350px] w-[350px] rounded-full bg-emerald-200 blur-[120px] opacity-50" />
+
+    </div>
+
+
+      <div className="mx-auto max-w-6xl">
+
+        <h1 className="text-5xl font-semibold leading-tight tracking-tight md:text-7xl">
           Audit Results
         </h1>
 
-        <p className="mt-4 text-gray-400">
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-black/60">
           Personalized AI spend optimization report.
         </p>
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
 
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-        <p className="text-sm text-gray-400">
+        <div className="rounded-3xl border border-white/40 bg-white/70 p-8 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.06)] backdrop-blur-2xl transition hover:-translate-y-1">
+        <p className="text-sm font-medium text-black/50">
           Monthly Savings
         </p>
 
-        <h2 className="mt-3 text-4xl font-bold text-green-400">
+        <h2 className="mt-5 text-5xl font-bold text-green-500">
           ${result.estimatedSavings}
         </h2>
         </div>
 
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-        <p className="text-sm text-gray-400">
+        <div className="rounded-[32px] border border-white/40 bg-white/70 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.06)] backdrop-blur-2xl transition hover:-translate-y-1">
+        <p className="text-sm font-medium text-black/50">
           Annual Savings
         </p>
 
-        <h2 className="mt-3 text-4xl font-bold text-green-400">
+        <h2 className="mt-5 text-5xl font-bold text-green-500">
           ${result.estimatedSavings * 12}
         </h2>
         </div>
 
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
-        <p className="text-sm text-gray-400">
+        <div className="rounded-[32px] border border-white/40 bg-white/70 p-8 shadow-[0_20px_60px_rgba(0,0,0,0.06)] backdrop-blur-2xl transition hover:-translate-y-1">
+        <p className="text-sm font-medium text-black/50">
           Optimization Score
         </p>
 
-        <h2 className="mt-3 text-4xl font-bold text-purple-400">
+        <h2 className="mt-5 text-5xl font-bold text-purple-500">
            {result.estimatedSavings > 0 ? "72%" : "95%"}
         </h2>
       </div>
@@ -207,83 +215,83 @@ useEffect(() => {
     </div>
 
         {/* Results Card */}
-        <div className="mt-10 rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition-all duration-300 hover:border-purple-500/30 hover:bg-white/[0.07]">
+        <div className="mt-12 rounded-[40px] border border-white/40 bg-white/70 p-8 shadow-[0_20px_80px_rgba(0,0,0,0.08)] backdrop-blur-2xl md:p-10">
 
           <div className="grid gap-6 md:grid-cols-2">
 
             <div className=" rounded-2xl bg-black/20 p-5 transition-all duration-300 hover:bg-black/40 hover:scale-[1.02]">
-              <p className="text-sm text-gray-400">
+              <p className="text-sm font-medium text-black/50">
                 Current Tool
               </p>
 
-              <h2 className="mt-2 text-3xl font-bold">
+              <h2 className="mt-4 text-4xl font-bold tracking-tight">
                 {formData.tool}
               </h2>
             </div>
 
-            <div className=" rounded-2xl bg-black/20 p-5 transition-all duration-300 hover:bg-black/40 hover:scale-[1.02]">
-              <p className="text-sm text-gray-400">
+            <div className=" rounded-3xl bg-white/80 p-6 shadow-sm transition hover:scale-[1.02]">
+              <p className="text-sm font-medium text-black/50">
                 Current Plan
               </p>
 
-              <h2 className="mt-2 text-3xl font-bold">
+              <h2 className="mt-4 text-4xl font-bold tracking-tight">
                 {formData.plan}
               </h2>
             </div>
 
-            <div className=" rounded-2xl bg-black/20 p-5 transition-all duration-300 hover:bg-black/40 hover:scale-[1.02]">
-              <p className="text-sm text-gray-400">
+            <div className=" rounded-3xl bg-white/80 p-6 shadow-sm transition hover:scale-[1.02]">
+              <p className="text-sm font-medium text-black/50">
                 Recommended Plan
               </p>
 
-              <h2 className="mt-2 text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
+              <h2 className="mt-4 text-4xl font-bold tracking-tight bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
                 {result.recommendedPlan}
               </h2>
             </div>
 
-            <div className=" rounded-2xl bg-black/20 p-5 transition-all duration-300 hover:bg-black/40 hover:scale-[1.02]">
-              <p className="text-sm text-gray-400">
+            <div className=" rounded-3xl bg-white/80 p-6 shadow-sm transition hover:scale-[1.02]">
+              <p className="text-sm font-medium text-black/50">
                 Estimated Monthly Savings
               </p>
 
-              <h2 className="mt-2 text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
+              <h2 className="mt-4 bg-gradient-to-r from-green-500 to-emerald-400 bg-clip-text text-4xl font-bold tracking-tight text-transparent">
                 ${result.estimatedSavings}
               </h2>
             </div>
             {result.estimatedSavings > 50 && (
-            <div className="md:col-span-2mt-8 rounded-2xl bg-purple-500/10 border border-purple-500/20 p-6">
+            <div className="mt-8 rounded-3xl border border-purple-200 bg-purple-100/70 p-8">
 
             <h3 className="text-2xl font-bold">
                 Large Savings Opportunity Detected
             </h3>
 
-            <p className="mt-3 text-gray-300">
+            <p className="mt-4 max-w-2xl text-black/70">
                 Your organization may benefit from a deeper AI infrastructure optimization consultation.
             </p>
 
         </div>
         )}
         {result.estimatedSavings === 0 && (
-        <div className="md:col-span-2 mt-8 rounded-2xl border border-green-500/20 bg-green-500/10 p-6">
+        <div className="mt-8 rounded-3xl border border-green-200 bg-green-100/70 p-8">
 
-        <h3 className="text-2xl font-bold text-green-400">
+        <h3 className="text-2xl font-bold text-green-700">
         Your AI Spending Looks Optimized
         </h3>
 
-        <p className="mt-3 text-gray-300">
+        <p className="mt-4 max-w-2xl text-black/70">
       Based on current analysis, your organization is already using a cost-efficient AI setup.
         </p>
 
         </div>
         )}
         
-            <div className="md:col-span-2 mt-8 rounded-2xl bg-green-500/10 border border-green-500/20 p-6">
+            <div className="mt-8 rounded-3xl border border-green-200 bg-green-100/70 p-8">
 
-            <p className="text-sm text-green-300">
+            <p className="text-sm font-medium text-green-700">
                  Estimated Annual Savings
             </p>
 
-            <h2 className="mt-2 text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 to-emerald-300 bg-clip-text text-transparent">
+            <h2 className="mt-4 bg-gradient-to-r from-green-500 to-emerald-400 bg-clip-text text-5xl font-bold text-transparent">
                     ${yearlySavings}
                 </h2>
 
@@ -292,39 +300,39 @@ useEffect(() => {
           </div>
 
           {/* Recommendation */}
-          <div className="fade-in mt-10 rounded-2xl bg-black/30 p-6">
+          <div className="mt-10 rounded-3xl bg-white/80 p-8 shadow-sm">
 
-            <h3 className="text-xl font-semibold">
+            <h3 className="text-2xl font-bold">
               Recommendation
             </h3>
 
-            <p className="mt-4 text-gray-300">
+            <p className="mt-5 text-lg leading-8 text-black/70">
               {result.reason}
             </p>
 
           </div>
-          <div className="mt-8 rounded-3xl border border-purple-500/20 bg-purple-500/10 p-8">
+          <div className="mt-10 rounded-3xl border border-purple-200 bg-purple-100/70 p-8">
 
-          <h3 className="text-2xl font-bold">
+          <h3 className="text-3xl font-bold">
             AI Generated Audit Summary
           </h3>
 
           {loadingSummary ? (
-            <p className="mt-4 text-gray-300">
+            <p className="mt-5 text-black/60">
               Generating AI insights...
             </p>
           ) : (
-            <p className="mt-4 leading-8 text-gray-200">
+            <p className="mt-5 text-lg leading-9 text-black/70">
             {summary}
           </p>
           )}
           <button
            onClick={downloadPDF}
-            className="mt-8 rounded-xl bg-purple-500 px-8 py-4 font-semibold transition hover:bg-purple-400">
+            className="mt-8 rounded-full bg-green-400 px-8 py-4 text-lg font-medium text-black shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-green-300 active:scale-[0.98]">
             Download PDF Report
           </button>
-          <p className="mt-4 text-gray-400">
-            Audit ID: {auditId}
+          <p className="mt-5 text-sm text-black/40">
+          Audit ID: {auditId}
           </p>
           
 

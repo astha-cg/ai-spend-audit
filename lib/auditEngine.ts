@@ -16,14 +16,8 @@ export function generateAudit(
  
   input: AuditInput
 ): AuditResult {
-   
-
-  const { tool, plan, monthlySpend, teamSize, useCase } = input;
+  const { tool, plan, monthlySpend, teamSize } = input;
   const newCost = teamSize * 30;
-  const estimatedSavings = Math.max(
-  0,
-  monthlySpend - newCost
-    );
 
   // ChatGPT Enterprise downgrade
   if (
@@ -33,7 +27,7 @@ export function generateAudit(
   ) {
     return {
       recommendedPlan: "team",
-      estimatedSavings: monthlySpend - newCost,
+      estimatedSavings: Math.max(0, monthlySpend - newCost),
       reason:
         "Enterprise plan may be unnecessary for small teams.",
     };
@@ -65,6 +59,14 @@ export function generateAudit(
         "Claude Pro can handle most general writing and research workflows.",
     };
   }
+  {
+    return {
+      recommendedPlan: "team",
+      estimatedSavings: monthlySpend - newCost,
+      reason:
+        "Enterprise plan may be unnecessary for small teams.",
+    };
+  }
 
   // Default response
   return {
@@ -73,4 +75,6 @@ export function generateAudit(
     reason:
       "Your current setup already appears cost optimized.",
   };
+  
+
 }
