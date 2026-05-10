@@ -1,5 +1,6 @@
 "use client";
 
+import jsPDF from "jspdf";
 import { useEffect, useState } from "react";
 import { generateAudit } from "@/lib/auditEngine";
 import { supabase } from "@/lib/supabase";
@@ -10,6 +11,8 @@ export default function ResultsPage() {
   const [formData, setFormData] = useState<any>(null);
   const [summary, setSummary] = useState("");
   const [loadingSummary, setLoadingSummary] = useState(true);
+  const auditId =
+      Math.random().toString(36).substring(2, 10);
 
 
 useEffect(() => {
@@ -63,6 +66,7 @@ useEffect(() => {
           }),
         }
       );
+      
 
       const data = await response.json();
 
@@ -125,6 +129,36 @@ useEffect(() => {
 }
   
   const yearlySavings = result.estimatedSavings * 12;
+  function downloadPDF() {
+
+  const doc = new jsPDF();
+
+  doc.setFontSize(20);
+
+  doc.text("AI Spend Audit Report", 20, 20);
+
+  doc.setFontSize(12);
+
+  doc.text(
+    `Recommended Plan: ${result.recommendedPlan}`,
+    20,
+    50
+  );
+
+  doc.text(
+    `Monthly Savings: $${result.estimatedSavings}`,
+    20,
+    70
+  );
+
+  doc.text(
+    `Annual Savings: $${result.estimatedSavings * 12}`,
+    20,
+    90
+  );
+
+  doc.save("audit-report.pdf");
+}
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-black via-[#090e1f] to-[#050816] text-white px-4 py-12 md:px-6 md:py-16">
@@ -284,6 +318,14 @@ useEffect(() => {
             {summary}
           </p>
           )}
+          <button
+           onClick={downloadPDF}
+            className="mt-8 rounded-xl bg-purple-500 px-8 py-4 font-semibold transition hover:bg-purple-400">
+            Download PDF Report
+          </button>
+          <p className="mt-4 text-gray-400">
+            Audit ID: {auditId}
+          </p>
           
 
         </div>
