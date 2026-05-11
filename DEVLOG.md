@@ -217,3 +217,131 @@ The project now has:
 - deployment readiness
 - scalable frontend structure
 
+# Day 5 — 2026-05-10
+
+**Hours worked:** 3
+
+## What I Worked On
+
+Today I focused on improving the audit form, results system, and making the project closer to the internship requirements.
+
+---
+
+## Features Added
+
+### Dynamic AI Tool + Plan Selection
+- Added multiple AI tools:
+  - Cursor
+  - ChatGPT
+  - Claude
+  - GitHub Copilot
+  - Gemini
+  - OpenAI API
+  - Anthropic API
+  - Windsurf
+
+- Added dynamic plan dropdowns based on selected tool.
+
+Example:
+- Selecting ChatGPT shows:
+  - Plus
+  - Team
+  - Enterprise
+  - API Direct
+
+---
+
+## Improved Audit Form
+Added:
+- Monthly spend input
+- Team size input
+- Seats input
+- Use case selection
+- Local storage persistence
+
+Form data now remains saved after page refresh.
+
+---
+
+## Results Page Improvements
+Enhanced:
+- Better UI styling
+- Glassmorphism cards
+- Dynamic savings calculations
+- Annual savings display
+- Optimization score
+- AI-generated summary section
+- Consultation CTA for high savings cases
+
+---
+
+## PDF Download
+Implemented PDF export using jsPDF.
+
+Users can now:
+- Download audit report
+- Save recommendations locally
+
+---
+
+## Email Capture Section
+Added:
+- Email input section
+- Save report CTA
+- Post-value email collection flow
+
+This follows the internship requirement:
+"Show value before asking for email."
+
+---
+
+## Bug Fixes
+Fixed:
+- Plan dropdown not rendering
+- Negative savings calculations
+- Local storage parsing issues
+- Null form data issues
+- Result rendering problems
+
+---
+
+## UI Improvements
+Updated:
+- Landing page theme
+- Audit form design
+- Results page styling
+- Modern gradient background
+- Glassmorphism effects
+- Better responsiveness
+
+---
+
+## Current Project Status
+
+Completed:
+- Landing page
+- Audit form
+- Results page
+- PDF export
+- Supabase integration
+- Local storage persistence
+- Dynamic tool selection
+- AI summary generation fallback
+
+Remaining:
+- Real AI learning system
+- Public shareable URLs
+- Open Graph previews
+- Production testing
+- Final deployment polish
+
+---
+
+## Key Learning Today
+Learned:
+- Dynamic rendering in React
+- Conditional UI rendering
+- Local storage handling
+- Debugging dropdown/state issues
+- Structuring scalable audit data
+- Preparing project for future AI model integration
