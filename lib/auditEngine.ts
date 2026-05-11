@@ -69,12 +69,13 @@ export function generateAudit(
   }
 
   // Default response
+  {
   return {
-    recommendedPlan: plan,
+    recommendedPlan: "plan",
     estimatedSavings: 0,
     reason:
       "Your current setup already appears cost optimized.",
   };
   
-
+  }
 }

@@ -28,8 +28,7 @@ useEffect(() => {
     }
 
     const parsedData = JSON.parse(savedData);
-
-    console.log(parsedData);
+    
 
     // Extra safety check
     if (!parsedData) {
