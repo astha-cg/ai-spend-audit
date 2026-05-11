@@ -13,6 +13,11 @@ export default function AuditPage() {
   const [monthlySpend, setMonthlySpend] = useState("");
   const [teamSize, setTeamSize] = useState("");
   const [useCase, setUseCase] = useState("");
+    const selectedTool = aiTools.find(
+  (item) => item.name === tool
+  );
+  const [seats, setSeats] = useState("");
+
 
   useEffect(() => {
   const formData = {
@@ -82,16 +87,23 @@ useEffect(() => {
       <label className="mb-3 block text-sm font-medium text-black/70">
         Plan
       </label>
-
-      <input
-        type="text"
+        <select
         value={plan}
         onChange={(e) => setPlan(e.target.value)}
-        placeholder="e.g. Team"
-        className="w-full rounded-2xl border border-black/10 bg-white/80 px-5 py-4 text-black shadow-sm outline-none transition focus:border-green-400 focus:ring-4 focus:ring-green-200"
-      />
-    </div>
+        className="w-full rounded-2xl border border-black/10 bg-white/80 px-5 py-4 text-black shadow-sm outline-none transition focus:border-green-400 focus:ring-4 focus:ring-green-200">
+        <option value="">
+        Select Plan
+      </option>
 
+      {selectedTool?.plans.map((p) => (
+      <option key={p} value={p}>
+      {p}
+    </option>
+       ))}
+      </select>
+    </div>
+{/*className="w-full rounded-2xl border border-black/10 bg-white/80 px-5 py-4 text-black shadow-sm outline-none transition focus:border-green-400 focus:ring-4 focus:ring-green-200"
+      */}
     {/* Monthly Spend */}
     <div>
       <label className="mb-3 block text-sm font-medium text-black/70">
@@ -106,6 +118,23 @@ useEffect(() => {
         className="w-full rounded-2xl border border-black/10 bg-white/80 px-5 py-4 text-black shadow-sm outline-none transition focus:border-green-400 focus:ring-4 focus:ring-green-200"
       />
     </div>
+    <div>
+
+  <label className="mb-3 block text-sm font-medium text-black/70">
+    Number of Seats
+  </label>
+
+  <input
+    type="number"
+    value={seats}
+    onChange={(e) =>
+      setSeats(e.target.value)
+    }
+    placeholder="10"
+    className="w-full rounded-2xl border border-black/10 bg-white/80 px-5 py-4 text-black shadow-sm outline-none transition focus:border-green-400 focus:ring-4 focus:ring-green-200"
+  />
+
+</div>
 
     {/* Team Size */}
     <div>
@@ -123,18 +152,44 @@ useEffect(() => {
     </div>
 
     {/* Use Case */}
-    <div>
+    <div> 
       <label className="mb-3 block text-sm font-medium text-black/70">
-        Primary Use Case
+        Use Case
       </label>
-
-      <textarea
-        value={useCase}
-        onChange={(e) => setUseCase(e.target.value)}
-        placeholder="Coding, writing, research, customer support..."
-        className="min-h-[120px] w-full rounded-2xl border border-black/10 bg-white/80 px-5 py-4 text-black shadow-sm outline-none transition focus:border-green-400 focus:ring-4 focus:ring-green-200"
-      />
     </div>
+    <select
+  value={useCase}
+  onChange={(e) =>
+    setUseCase(e.target.value)
+  }
+  className="w-full rounded-2xl border border-black/10 bg-white/80 px-5 py-4 text-black shadow-sm outline-none transition focus:border-green-400 focus:ring-4 focus:ring-green-200"
+>
+
+  <option value="">
+    Select Use Case
+  </option>
+
+  <option value="coding">
+    Coding
+  </option>
+
+  <option value="writing">
+    Writing
+  </option>
+
+  <option value="data">
+    Data
+  </option>
+
+  <option value="research">
+    Research
+  </option>
+
+  <option value="mixed">
+    Mixed
+  </option>
+
+</select>
 
     {/* Submit Button */}
     <button
@@ -146,11 +201,12 @@ useEffect(() => {
     }
 
     const auditData = {
-        tool,
-        plan,
-        monthlySpend,
-        teamSize,
-        useCase,
+    tool,
+    plan,
+    monthlySpend,
+    seats,
+    teamSize,
+    useCase,
     };
 
     localStorage.setItem(

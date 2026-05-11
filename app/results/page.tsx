@@ -29,6 +29,8 @@ useEffect(() => {
 
     const parsedData = JSON.parse(savedData);
 
+    console.log(parsedData);
+
     // Extra safety check
     if (!parsedData) {
       console.log("Parsed data is null");
@@ -264,6 +266,9 @@ useEffect(() => {
             <h3 className="text-2xl font-bold">
                 Large Savings Opportunity Detected
             </h3>
+            <a href="https://cal.com" target="_blank" className="mt-6 inline-block rounded-full bg-black px-8 py-4 text-white">
+              Book Consultation
+          </a>
 
             <p className="mt-4 max-w-2xl text-black/70">
                 Your organization may benefit from a deeper AI infrastructure optimization consultation.
@@ -279,7 +284,7 @@ useEffect(() => {
         </h3>
 
         <p className="mt-4 max-w-2xl text-black/70">
-      Based on current analysis, your organization is already using a cost-efficient AI setup.
+          Based on current analysis, your organization is already using a cost-efficient AI setup.
         </p>
 
         </div>
@@ -341,6 +346,28 @@ useEffect(() => {
         </div>
 
       </div>
+      <div className="mt-10 rounded-3xl bg-white/80 p-8 shadow-sm">
+
+      <h3 className="text-3xl font-bold">
+        Save Your Audit Report
+      </h3>
+
+      <p className="mt-4 text-black/60">
+        Enter your email to save,
+        download, and share your audit.
+      </p>
+
+      <input
+      type="email"
+      placeholder="Enter your email"
+      className="mt-6 w-full rounded-2xl border border-black/10 bg-white px-5 py-4"
+      />
+
+      <button className="mt-8 rounded-full bg-green-400 px-8 py-4 text-lg font-medium text-black shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-green-300 active:scale-[0.98]">
+      Save Report
+      </button>
+
+</div>
 
     </main>
   );

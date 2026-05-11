@@ -1,22 +1,70 @@
 export const aiTools = [
   {
-    name: "ChatGPT",
-    plans: ["Plus", "Team", "Enterprise"],
-  },
-  {
     name: "Cursor",
-    plans: ["Pro", "Business"],
+    plans: [
+      "Hobby",
+      "Pro",
+      "Business",
+      "Enterprise",
+    ],
   },
-  {
-    name: "Claude",
-    plans: ["Pro", "Max"],
-  },
+
   {
     name: "GitHub Copilot",
-    plans: ["Individual", "Business"],
+    plans: [
+      "Individual",
+      "Business",
+      "Enterprise",
+    ],
   },
+
+  {
+    name: "Claude",
+    plans: [
+      "Free",
+      "Pro",
+      "Max",
+      "Team",
+      "Enterprise",
+      "API Direct",
+    ],
+  },
+
+  {
+    name: "ChatGPT",
+    plans: [
+      "Plus",
+      "Team",
+      "Enterprise",
+      "API Direct",
+    ],
+  },
+
+  {
+    name: "Anthropic API",
+    plans: ["API Direct"],
+  },
+
+  {
+    name: "OpenAI API",
+    plans: ["API Direct"],
+  },
+
   {
     name: "Gemini",
-    plans: ["Advanced", "Enterprise"],
+    plans: [
+      "Pro",
+      "Ultra",
+      "API",
+    ],
+  },
+
+  {
+    name: "Windsurf",
+    plans: [
+      "Free",
+      "Pro",
+      "Teams",
+    ],
   },
 ];
