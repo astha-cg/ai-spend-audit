@@ -1,10 +1,12 @@
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/image"; 
 import { supabase } from "@/lib/supabase";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#f6f4ef] text-black">
+      <SpeedInsights />
 
       {/* Background Glow */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
