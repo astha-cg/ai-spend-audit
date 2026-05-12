@@ -1,3 +1,4 @@
+import { pricingData } from "@/data/pricing";
 type AuditInput = {
   tool: string;
   plan: string;
@@ -10,6 +11,9 @@ type AuditResult = {
   recommendedPlan: string;
   estimatedSavings: number;
   reason: string;
+  currentCost?: number;
+  newCost?: number;
+  recommendedTool?: string;
 };
 
 export function generateAudit(
@@ -17,7 +21,19 @@ export function generateAudit(
   input: AuditInput
 ): AuditResult {
   const { tool, plan, monthlySpend, teamSize } = input;
-  const newCost = teamSize * 30;
+  //const newCost = teamSize * 30;
+  const planCost = pricingData[tool][plan] || 0;
+
+
+  // Calculate actual current cost
+  let newCost = Number(teamSize) * Number(planCost);
+
+  // Example recommendation logic
+  let recommendedPlan = plan;
+  let recommendedTool = tool;
+  let currentCost = monthlySpend;
+
+
 
   // ChatGPT Enterprise downgrade
   if (
@@ -33,49 +49,42 @@ export function generateAudit(
     };
   }
 
-  // Cursor Business downgrade
+  // Downgrade suggestions
+  if (
+    tool === "ChatGPT" &&
+    plan === "enterprise"
+  ) {
+    recommendedPlan = "team";
+
+    newCost =Number(teamSize) *pricingData["ChatGPT"]["team"];
+  }
+
   if (
     tool === "Cursor" &&
-    plan === "business" &&
-    teamSize <= 5
+    plan === "business"
   ) {
-    return {
-      recommendedPlan: "Pro",
-      estimatedSavings: monthlySpend - 20,
-      reason:
-        "Cursor Pro is sufficient for smaller engineering teams.",
-    };
+    recommendedPlan = "pro";
+
+    newCost =Number(teamSize) *pricingData["Cursor"]["pro"];
   }
 
-  // Claude Max optimization
-  if (
-    tool === "Claude" &&
-    plan === "Max"
-  ) {
-    return {
-      recommendedPlan: "Pro",
-      estimatedSavings: monthlySpend - 20,
-      reason:
-        "Claude Pro can handle most general writing and research workflows.",
-    };
-  }
-  {
-    return {
-      recommendedPlan: "team",
-      estimatedSavings: monthlySpend - newCost,
-      reason:
-        "Enterprise plan may be unnecessary for small teams.",
-    };
-  }
+  // Savings Formula
+  const estimatedSavings =
+    currentCost - newCost;
 
-  // Default response
-  {
   return {
-    recommendedPlan: "plan",
-    estimatedSavings: 0,
+    currentCost,
+    newCost,
+    estimatedSavings:
+      estimatedSavings > 0
+        ? estimatedSavings
+        : 0,
+
+    recommendedTool,
+    recommendedPlan,
+
     reason:
-      "Your current setup already appears cost optimized.",
-  };
-  
-  }
-}
+      estimatedSavings > 0
+        ? `Switching to ${recommendedPlan} can reduce your monthly AI spending.`
+        : "Your current setup already looks optimized.",
+  };}

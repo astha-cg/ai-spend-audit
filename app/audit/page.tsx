@@ -96,7 +96,7 @@ useEffect(() => {
       </option>
 
       {selectedTool?.plans.map((p) => (
-      <option key={p} value={p}>
+      <option key={p} value={p.toLowerCase()}>
       {p}
     </option>
        ))}
@@ -118,23 +118,7 @@ useEffect(() => {
         className="w-full rounded-2xl border border-black/10 bg-white/80 px-5 py-4 text-black shadow-sm outline-none transition focus:border-green-400 focus:ring-4 focus:ring-green-200"
       />
     </div>
-    <div>
-
-  <label className="mb-3 block text-sm font-medium text-black/70">
-    Number of Seats
-  </label>
-
-  <input
-    type="number"
-    value={seats}
-    onChange={(e) =>
-      setSeats(e.target.value)
-    }
-    placeholder="10"
-    className="w-full rounded-2xl border border-black/10 bg-white/80 px-5 py-4 text-black shadow-sm outline-none transition focus:border-green-400 focus:ring-4 focus:ring-green-200"
-  />
-
-</div>
+    
 
     {/* Team Size */}
     <div>

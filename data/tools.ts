@@ -67,4 +67,19 @@ export const aiTools = [
       "Teams",
     ],
   },
+  {
+    name:"v0",
+    plans:[
+      "Free",
+    "Premium"
+    ]
+  },
+  {
+    name:"Jasper",
+    plans:[
+      "Creator",
+    "Pro",
+    "Business"
+    ]
+  }
 ];

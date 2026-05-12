@@ -108,15 +108,7 @@ export default function Home() {
           </div>
 
           {/* Trusted Logos */}
-          <div className="mt-20 flex flex-wrap items-center gap-8 text-sm font-medium text-black/40">
-
-            <p>OpenAI</p>
-            <p>Supabase</p>
-            <p>Vercel</p>
-            <p>Stripe</p>
-            <p>Notion</p>
-
-          </div>
+          
 
         </div>
 
