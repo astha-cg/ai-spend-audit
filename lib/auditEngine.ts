@@ -22,7 +22,10 @@ export function generateAudit(
 ): AuditResult {
   const { tool, plan, monthlySpend, teamSize } = input;
   //const newCost = teamSize * 30;
-  const planCost = pricingData[tool][plan] || 0;
+  const planCost =
+    pricingData?.[tool as keyof typeof pricingData]?.[
+      plan as keyof (typeof pricingData)[keyof typeof pricingData]
+    ] || 0;
 
 
   // Calculate actual current cost
