@@ -17,6 +17,8 @@ export default function AuditPage() {
   (item) => item.name === tool
   );
   const [seats, setSeats] = useState("");
+  const [email, setEmail] =
+  useState("");
 
 
   useEffect(() => {

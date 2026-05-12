@@ -3,6 +3,7 @@ import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
+
 export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#f6f4ef] text-black">
