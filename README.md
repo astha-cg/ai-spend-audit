@@ -48,27 +48,17 @@ newCost = teamSize * planCost
 
 estimatedSavings = currentCost - newCost
 
-🤖 AI Recommendation Engine</h2>
+<h2> 🤖 AI Recommendation Engine</h2>
 
 Current Tool
  Recommended Tool
-          ChatGPT Team</td>
-          <td>Claude Pro</td>
-        </tr>
-
-        <tr>
-          <td>Copilot Business</td>
-          <td>Cursor Pro</td>
-        </tr>
-
-        <tr>
-          <td>Gemini Enterprise</td>
-          <td>ChatGPT Team</td>
-        </tr>
-      </tbody>
-    </table>
-
-  </div>
+  - ChatGPT Team
+  - Claude Pro
+  - Copilot Business
+  - Cursor Pro
+  - Gemini Enterprise
+  - ChatGPT Team
+  
 
   <h2>🧠 Future AI Learning System</h2>
 
@@ -85,35 +75,29 @@ save money with Cursor
 THEN recommend Cursor more often
 </pre>
 
-    <h3>Planned Features</h3>
+<h3> Planned Features</h3>
 
-    <ul>
-      <li>Most overspent AI tools</li>
-      <li>Most recommended downgrades</li>
-      <li>Average savings per AI tool</li>
-      <li>Best plans for startups</li>
-      <li>Enterprise optimization analytics</li>
-    </ul>
 
-  </div>
+- Most overspent AI tools
+- Most recommended downgrades
+- Average savings per AI tool
+- Best plans for startups
+- Enterprise optimization analytics
+    
 
-  <h2>🛠️ Tech Stack</h2>
+<h2>🛠️ Tech Stack</h2>
 
-  <div class="card">
 
-    <ul>
-      <li><strong>Frontend:</strong> Next.js, React, Tailwind CSS</li>
-      <li><strong>Backend:</strong> Next.js API Routes</li>
-      <li><strong>Database:</strong> Supabase</li>
-      <li><strong>AI:</strong> OpenAI API</li>
-      <li><strong>Deployment:</strong> Vercel</li>
-    </ul>
 
-  </div>
+       Next.js, React, Tailwind CSS
+       Next.js API Routes
+       Supabase
+      OpenAI API
+       Vercel
 
   <h2>📂 Project Structure</h2>
 
-  <div class="card">
+ 
 
 <pre>
 app/
@@ -132,20 +116,17 @@ data/
 </pre>
 
   </div>
+<h2>⚙️ Installation</h2>
 
-  <h2>⚙️ Installation</h2>
+<h3> Clone Repository</h3>
 
-  <div class="card">
 
-    <h3>Clone Repository</h3>
-
-<pre>
 git clone https://github.com/yourusername/ai-spend-audit.git
-</pre>
 
-    <h3>Install Dependencies</h3>
 
-<pre>
+<h3> Install Dependencies</h3>
+
+
 npm install
 <h3> Run Development Server</h3>
 npm run dev
