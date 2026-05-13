@@ -11,6 +11,7 @@ export default function ResultsPage() {
   const [formData, setFormData] = useState<any>(null);
   const [summary, setSummary] = useState("");
   const [loadingSummary, setLoadingSummary] = useState(true);
+  const [email, setEmail] = useState("");
   const auditId =
 
       Math.random().toString(36).substring(2, 10);
@@ -116,52 +117,63 @@ export default function ResultsPage() {
   const yearlySavings = result.estimatedSavings * 12;
   function downloadPDF() {
   const doc = new jsPDF();
+
   doc.setFontSize(20);
   doc.text("AI Spend Audit Report", 20, 20);
+
   doc.setFontSize(12);
+
   doc.text(
     `Recommended Plan: ${result.recommendedPlan}`,
     20,
     50
   );
+
   doc.text(
     `Monthly Savings: $${result.estimatedSavings}`,
     20,
     70
   );
+
   doc.text(
     `Annual Savings: $${result.estimatedSavings * 12}`,
     20,
     90
   );
+
   doc.save("audit-report.pdf");
 }
-  {/*sendreport*/}
-  async function sendReport() {
 
-  const email =prompt("Enter email");
-  if (!email) return;
+async function sendReport() {
 
-  await fetch(
-    "/api/send-report",
-    {
+  if (!email) {
+    alert("Please enter email");
+    return;
+  }
+
+  try {
+
+    await fetch("/api/send-report", {
       method: "POST",
 
       headers: {
-        "Content-Type":
-          "application/json",
+        "Content-Type": "application/json",
       },
 
       body: JSON.stringify({
         email,
-
-        reportUrl:
-          window.location.href,
+        reportUrl: window.location.href,
       }),
-    }
-  );
+    });
 
-  alert("Report sent!");
+    alert("Report sent!");
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Failed to send report");
+  }
 }
 
   
@@ -316,17 +328,19 @@ export default function ResultsPage() {
         Enter your email to save,
         download, and share your audit.
       </p>
-
       <input
       type="email"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
       placeholder="Enter your email"
       className="mt-6 w-full rounded-2xl border border-black/10 bg-white px-5 py-4"
       />
-      <button 
+       <button 
       onClick={sendReport}
       className="mt-8 rounded-full bg-green-400 px-8 py-4 text-lg font-medium text-black shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-green-300 active:scale-[0.98]">
       Save Report
       </button>
+
       
 </div>
 
