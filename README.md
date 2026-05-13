@@ -121,7 +121,7 @@ data/
 <h3> Clone Repository</h3>
 
 
-git clone https://github.com/yourusername/ai-spend-audit.git
+git clone :https://github.com/astha-cg/ai-spend-audit.git
 
 
 <h3> Install Dependencies</h3>
