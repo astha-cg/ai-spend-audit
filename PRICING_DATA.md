@@ -1,43 +1,101 @@
 # Pricing Data Sources
 
-All pricing data is sourced from official vendor pricing pages.
+All pricing data is sourced from official vendor pricing pages and verified manually.
+
+Last Updated: May 2026
 
 ---
 
-## Cursor
+# Cursor
 
-- Pro: $20/user/month  
-  https://cursor.com/pricing  
-  verified 2026-05-07
+Official Pricing:
+https://cursor.com/pricing
 
-- Business: $40/user/month  
-  https://cursor.com/pricing  
-  verified 2026-05-07
+| Plan | Price |
+|------|------|
+| Pro | $20/user/month |
+| Business | $40/user/month |
 
----
-
-## ChatGPT
-
-- Plus: $20/month  
-  https://openai.com/chatgpt/pricing  
-  verified 2026-05-07
-
-- Team: $30/user/month  
-  https://openai.com/chatgpt/pricing  
-  verified 2026-05-07
+Verified: 2026-05-07
 
 ---
 
-## Claude
+# ChatGPT
 
-- Pro: $20/month  
-  https://www.anthropic.com/pricing  
-  verified 2026-05-07
+Official Pricing:
+https://openai.com/chatgpt/pricing
+
+| Plan | Price |
+|------|------|
+| Plus | $20/month |
+| Team | $30/user/month |
+| Enterprise | Custom Pricing |
+
+Verified: 2026-05-07
 
 ---
 
-## GitHub Copilot
+# Claude
 
-- Individual: $10/month  
-  https://github.com/features/copilot  
-  verified 2026-05-07
+Official Pricing:
+https://www.anthropic.com/pricing
+
+| Plan | Price |
+|------|------|
+| Pro | $20/month |
+| Team | Custom |
+| Enterprise | Custom |
+
+Verified: 2026-05-07
+
+---
+
+# GitHub Copilot
+
+Official Pricing:
+https://github.com/features/copilot
+
+| Plan | Price |
+|------|------|
+| Individual | $10/month |
+| Business | $19/user/month |
+| Enterprise | $39/user/month |
+
+Verified: 2026-05-07
+
+---
+
+# Gemini
+
+Official Pricing:
+https://one.google.com/about/google-ai-plans/
+
+| Plan | Price |
+|------|------|
+| Advanced | $20/month |
+| Enterprise | Custom |
+
+Verified: 2026-05-07
+
+---
+
+# Windsurf
+
+Official Pricing:
+https://codeium.com/pricing
+
+| Plan | Price |
+|------|------|
+| Pro | $15/month |
+| Teams | Custom |
+
+Verified: 2026-05-07
+
+---
+
+# Notes
+
+- Prices may change over time.
+- Enterprise pricing is usually custom quoted.
+- Annual billing discounts are not included unless explicitly specified.
+- API token pricing is excluded from this dataset.

@@ -1,347 +1,229 @@
-## Day 1 — 2026-05-07
-
-**Hours worked:** 8
-
-**What I did:**
-- Read and analyzed the complete Credex internship assignment requirements
-- Planned the overall architecture and feature breakdown for the AI Spend Audit platform
-- Initialized a new Next.js project using TypeScript, Tailwind CSS, and App Router
-- Configured GitHub repository and connected local project with remote repository
-- Resolved Git merge conflicts and repository synchronization issues
-- Installed and configured shadcn/ui components for the frontend UI system
-- Built the initial landing page with:
-  - responsive navbar
-  - hero section
-  - CTA buttons
-  - statistics cards
-  - footer
-- Added a custom AI-themed hero image and blended it with the dark landing page background using gradients and glow effects
-- Created the initial project folder structure for scalability
-- Created Supabase project and configured backend database
-- Created the `audits` table with required schema
-- Connected Supabase to the Next.js application using environment variables
-
-**What I learned:**
-- How to structure a production-ready Next.js application using App Router
-- How to integrate Supabase with a frontend application
-- Better understanding of Git remote conflicts and merge handling
-- Importance of clean UI hierarchy and visual consistency in SaaS landing pages
-- How modern startup landing pages use gradients, blur effects, and glow styling for polished UI design
-
-**Blockers / what I'm stuck on:**
-- Faced dependency conflicts while setting up shadcn/ui due to an incorrect Next.js version initially installed
-- Encountered Git push conflicts because the remote repository already contained commits
-- Still deciding the best structure for implementing scalable audit recommendation logic
-
-**Plan for tomorrow:**
-- Build the complete AI spend input form
-- Add dropdowns for AI tools and subscription plans
-- Implement form validation
-- Add localStorage persistence for saved form state
-- Start building the audit engine logic and pricing dataset
-
-## Day 2 — 2026-05-08
-
-**Hours worked:** 6
-
-**What I did:**
-- Created the complete audit input page using Next.js and Tailwind CSS
-- Built responsive form UI for collecting AI tool usage information
-- Added dropdown selection system for different AI platforms and plans
-- Implemented form state management using React hooks
-- Added fields for:
-  - AI tool selection
-  - subscription plan
-  - monthly spending
-  - team size
-  - primary use case
-- Implemented localStorage persistence to save form progress automatically
-- Added logic to reload saved form data after page refresh
-- Added client-side form validation for required fields
-- Created placeholder results page for audit output flow
-- Implemented routing between audit form and results page
-- Improved form styling with modern dark SaaS-inspired UI design
-- Organized project structure using separate data and utility folders
-
-**What I learned:**
-- Better understanding of React state management using useState and useEffect
-- How localStorage can improve user experience by preserving form state
-- Improved understanding of client-side routing in Next.js App Router
-- Importance of reusable data structures for scalable frontend architecture
-- Learned how responsive form design affects usability across devices
-
-**Blockers / what I'm stuck on:**
-- Initially faced confusion with React client components and hook usage
-- Needed additional debugging for localStorage synchronization after refresh
-- Still planning the best architecture for scalable recommendation logic
-
-**Plan for tomorrow:**
-- Build the complete audit engine and pricing calculation system
-- Add recommendation logic for AI tool optimization
-- Generate dynamic audit results
-- Create savings calculation functionality
-- Add yearly savings estimation
-- Improve overall user experience and interactions
-
-## Day 3 — 2026-05-09
-
-**Hours worked:** 8
-
-**What I did:**
-- Built the complete audit engine logic for AI spend analysis
-- Created centralized pricing dataset for multiple AI tools and plans
-- Implemented recommendation logic for identifying overspending scenarios
-- Added savings calculation system for monthly and yearly estimates
-- Created dynamic results page connected to audit form data
-- Implemented localStorage data flow between form and results pages
-- Added personalized recommendation cards based on user inputs
-- Added yearly savings calculation and high-savings opportunity alerts
-- Improved responsive layout for desktop and mobile devices
-- Added hover effects, transitions, focus states, and loading animations
-- Enhanced overall SaaS-style UI/UX consistency across pages
-- Added empty states and better feedback messaging for optimized plans
-- Started writing initial test structure for audit engine validation
-- Built AI-powered audit summary generation using OpenAI API integration and Next.js API routes. 
-- Added Supabase database integration to store audit records and implemented analytics cards for savings insights. 
-
-**What I learned:**
-- How to separate business logic into reusable utility files
-- Better understanding of state persistence using localStorage
-- How recommendation engines use rule-based optimization logic
-- Importance of responsive spacing and interaction feedback in frontend UX
-- How dynamic rendering works between pages in Next.js App Router
-- Improved understanding of scalable frontend architecture and data flow
-
-**Blockers / what I'm stuck on:**
-- Need to improve pricing logic to support more advanced optimization scenarios
-- Current recommendation engine is rule-based and still limited for complex use cases
-- Need to research better patterns for scalable audit calculation architecture
-- Still exploring best practices for frontend testing in Next.js
-
-**Plan for tomorrow:**
-- Add authentication system
-- Build downloadable audit reports
-- Add PDF export functionality
-- Improve dashboard and analytics visualization
-- Optimize overall UI polish and responsiveness
-- Prepare project for deployment
-- Improve performance and loading speed
-
-# Day 4- 2026-05-10
-
-**Hours worked:** 4
-
-
-## Progress Summary
-
-Today I focused on improving the frontend experience, authentication setup, deployment preparation, and overall UI consistency of the AI Spend Audit platform.
-
----
-
-## Features Implemented
-
-### Authentication Setup
-- Enabled Email Authentication in Supabase
-- Configured authentication provider settings
-- Prepared project for secure user onboarding
-
-### UI/UX Improvements
-- Redesigned the landing page with a modern SaaS-inspired interface
-- Added glassmorphism cards and soft gradient glow backgrounds
-- Improved spacing, typography, and responsive layout
-- Unified design language across Landing, Audit, and Results pages
-
-### Audit Form Improvements
-- Redesigned audit form to match the landing page theme
-- Added:
-  - smooth transitions
-  - hover animations
-  - responsive inputs
-  - focus ring effects
-- Improved button interactions and overall usability
-
-### Results Page Redesign
-- Created premium dashboard-style audit result layout
-- Added:
-  - savings cards
-  - optimization score section
-  - AI-generated summary section
-  - recommendation panels
-- Improved readability and visual hierarchy
-
-### Theme System
-- Started implementing Light/Dark mode support
-- Added theme provider setup using `next-themes`
-- Built reusable theme toggle component
-
-### Deployment Preparation
-- Prepared project for Vercel deployment
-- Configured required environment variables:
-  - Supabase URL
-  - Supabase Anon Key
-  - OpenAI API Key
-
----
-
-## Problems Faced
-
-### OpenAI API Quota Error
-- Encountered:
-  - `429 insufficient_quota`
-- Added fallback AI summary handling
-- Improved error handling for API failures
-
-### Vercel Deployment Issues
-- Fixed missing `package.json` / root directory problems
-- Verified Next.js project structure
-
----
-
-## Technologies Used
-- Next.js
-- Tailwind CSS
-- Supabase
-- Framer Motion
-- next-themes
-- OpenAI API
-
----
-
-## Outcome
-
-The project now has:
-- a modern SaaS-style interface
-- improved UX
-- responsive layouts
-- authentication support
-- deployment readiness
-- scalable frontend structure
-
-# Day 5 — 2026-05-10
-
-**Hours worked:** 3
-
-## What I Worked On
-
-Today I focused on improving the audit form, results system, and making the project closer to the internship requirements.
-
----
-
+## DevLog — AI Spend Audit Platform
+## Day 1 — Project Initialization
+## Goals
+- Define project idea
+- Set up frontend stack
+- Create basic routing structure
+## Work Completed
+- Initialized Next.js project using App Router
+- Configured Tailwind CSS
+- Created:
+  - Landing Page
+  - Audit Form Page
+  - Results Page
+- Designed initial UI layout
+- Added glassmorphism-inspired styling
 ## Features Added
-
-### Dynamic AI Tool + Plan Selection
-- Added multiple AI tools:
-  - Cursor
-  - ChatGPT
-  - Claude
-  - GitHub Copilot
-  - Gemini
-  - OpenAI API
-  - Anthropic API
-  - Windsurf
-
-- Added dynamic plan dropdowns based on selected tool.
-
-Example:
-- Selecting ChatGPT shows:
-  - Plus
-  - Team
-  - Enterprise
-  - API Direct
-
----
-
-## Improved Audit Form
-Added:
+- Tool selection dropdown
+- Plan selection dropdown
 - Monthly spend input
 - Team size input
-- Seats input
-- Use case selection
-- Local storage persistence
+- Use case selector
+## Tech Stack
+- Next.js
+- React
+- Tailwind CSS
+- TypeScript
+## Day 2 — Audit Logic & Recommendation Engine
+## Goals
+- Build AI spend calculation system
+- Add recommendation logic
+## Work Completed
+- Created auditEngine.ts
+- Added pricing logic
+- Added plan comparison logic
+- Implemented:
+  - Monthly cost calculations
+  - Estimated savings
+  - Annual savings
+  - Optimization score
+## Formula Implemented
+const currentCost =
+  monthlySpend;
 
-Form data now remains saved after page refresh.
+const newCost =
+  teamSize * recommendedPlanCost;
 
----
+const estimatedSavings =
+  currentCost - newCost;
+## Features Added
+- Recommended tool generation
+- Recommended plan generation
+- Savings calculations
+- Conditional recommendation messages
+## Day 3 — Dynamic Pricing System
+## Goals
+- Make pricing data scalable
+- Support multiple AI tools
+## Work Completed
+- Created centralized pricing database
+- Added support for:
+  - ChatGPT
+  - Claude
+  - Cursor
+  - Gemini
+  - GitHub Copilot
+  - Windsurf
+## Features Added
+- Dynamic pricing lookup
+- Dynamic plan matching
+- Multi-tool support
+- Real-world pricing structure
+## Example Pricing Structure
+export const pricingData = {
+  ChatGPT: {
+    plus: 20,
+    team: 30,
+  },
 
-## Results Page Improvements
-Enhanced:
-- Better UI styling
-- Glassmorphism cards
-- Dynamic savings calculations
-- Annual savings display
-- Optimization score
-- AI-generated summary section
-- Consultation CTA for high savings cases
+  Cursor: {
+    pro: 20,
+    business: 40,
+  },
+};
+## Day 4 — Persistent Storage & Analytics
+## Goals
+- Save audits
+- Start analytics foundation
+## Work Completed
+- Integrated Supabase
+- Created audits table
+- Stored:
+  - company
+  - team size
+  - savings
+  - recommended tool
+  - use case
+## Features Added
+- Audit persistence
+- Analytics-ready database
+- Historical audit tracking
+## Learning System Design
 
----
+- Started architecture for:
 
-## PDF Download
-Implemented PDF export using jsPDF.
+- Most overspent tools
+- Best startup plans
+- Best coding tools
+- Average savings tracking
+## Day 5 — AI Summary Generation
+## Goals
+- Generate intelligent summaries
+- Improve audit explanations
+Work Completed
+- Created API route:
+  - /api/generate-summary
+- Integrated OpenAI API
+- Added dynamic AI-generated reports
+## Features Added
+- AI-generated audit summaries
+- Dynamic recommendation reasoning
+- Personalized insights
+## Example Output
 
-Users can now:
-- Download audit report
-- Save recommendations locally
+"Your organization can reduce AI spending by switching from ChatGPT Team to Cursor Pro while maintaining similar developer productivity."
 
----
+## Day 6 — PDF Reports & Authentication
+## Goals
+- Add downloadable reports
+- Add authentication system
+- Improve production readiness
+## Work Completed
+- Integrated jsPDF
+- Added PDF report generation
+- Added Supabase authentication
+- Added email report architecture
+## Features Added
+- Download PDF Report
+- Save Audit Report
+- Email-ready report system
+- User authentication structure
+## PDF Includes
+- Recommended plan
+- Monthly savings
+- Annual savings
+- Audit ID
+## Day 7 — Recommendation Intelligence System
+## Goals
+- Make platform adaptive
+- Learn from previous audits
+## Work Completed
+- Designed recommendation scoring system
+- Added audit learning logic
+- Planned dynamic ranking engine
+## Intelligence Logic
+let recommendationScore = 0;
 
-## Email Capture Section
-Added:
-- Email input section
-- Save report CTA
-- Post-value email collection flow
+if (useCase === "coding")
+  recommendationScore += 5;
 
-This follows the internship requirement:
-"Show value before asking for email."
+if (tool === "ChatGPT")
+  recommendationScore += 2;
+## Future Learning Features
+- Most common downgrades
+- Smart plan recommendations
+- Use-case-based optimization
+- AI-powered ranking engine
+## Current Features
+## Core Features
+- AI Spend Audit
+- Savings Calculation
+- Plan Optimization
+- AI Summary Generation
+- PDF Report Download
+- Dynamic Pricing Engine
+- Supabase Database
+- Authentication
+- Recommendation Engine
+## Upcoming Features
+## Planned
+- Real-time pricing APIs
+- Team collaboration
+- Dashboard analytics
+- Admin panel
+- Stripe integration
+- Email automation
+- CSV upload support
+- AI learning system
+- Enterprise benchmarking
+- Public shareable audit links
+## Technical Architecture
+  ## Frontend
+  - Next.js App Router
+  - React
+  - Tailwind CSS
+  ## Backend
+  - API Routes
+  - Supabase
+  - OpenAI API
+  ## Database
+  - PostgreSQL (Supabase)
+  ## Deployment
+  - Vercel
 
----
+## Key Learnings
+  ## Engineering
+  - Dynamic pricing architecture
+  - Recommendation systems
+  - State management
+  - Authentication flows
+  - API integration
+  - Production deployment
+  ## Product Thinking
+  - SaaS optimization workflows
+  - Cost intelligence systems
+  - AI recommendation patterns
+  - User experience optimization
+  - Current Project Status
 
-## Bug Fixes
-Fixed:
-- Plan dropdown not rendering
-- Negative savings calculations
-- Local storage parsing issues
-- Null form data issues
-- Result rendering problems
+## MVP Status
 
----
+Completed
 
-## UI Improvements
-Updated:
-- Landing page theme
-- Audit form design
-- Results page styling
-- Modern gradient background
-- Glassmorphism effects
-- Better responsiveness
+## Production Readiness
 
----
+In Progress
 
-## Current Project Status
+## Next Major Milestone
 
-Completed:
-- Landing page
-- Audit form
-- Results page
-- PDF export
-- Supabase integration
-- Local storage persistence
-- Dynamic tool selection
-- AI summary generation fallback
-
-Remaining:
-- Real AI learning system
-- Public shareable URLs
-- Open Graph previews
-- Production testing
-- Final deployment polish
-
----
-
-## Key Learning Today
-Learned:
-- Dynamic rendering in React
-- Conditional UI rendering
-- Local storage handling
-- Debugging dropdown/state issues
-- Structuring scalable audit data
-- Preparing project for future AI model integration
+AI-powered adaptive recommendation engine with real-time pricing intelligence
