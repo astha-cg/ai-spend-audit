@@ -1,85 +1,112 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
-
-// 1. Define your calculation logic locally or import your original function
-function calculateRecommendation(currentTools: any, pricing: any) {
-  // TODO: Replace this placeholder with your actual Round 1 logic.
-  // It should look at the tools inside `current_tools` and evaluate against the new prices.
-  // Example mock output format matching your 'recommendations' jsonb structure:
-  return { recommended_tool: "openai_gpt4", expected_cost: 25 };
-}
+import { generateAudit } from "@/lib/auditEngine"; // 🚀 Import your dynamic audit engine
 
 export async function POST(request: Request) {
   try {
-    // Current live pricing state
-    const latestPricing = {
-      openai_gpt4: 25,
-      claude_pro: 30,
-      notion_ai: 12,
-      perplexity_pro: 20,
-    };
-
-    // Dynamically captures localhost or your production URL domain
     const { origin } = new URL(request.url);
 
-    // Fetch audits from Supabase matching your schema columns
+    // 1. Fetch real-time price sheets from registry
+    const pricingResponse = await fetch("https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json");
+    
+    if (!pricingResponse.ok) {
+      throw new Error("Failed to pull live price feeds from the registry network");
+    }
+    
+    const livePriceData = await pricingResponse.json();
+
+    // 2. Parse the live data, round integers, and map all 8 custom tools
+    const latestPricing = {
+      openai_gpt4: Math.round((livePriceData["gpt-4o"]?.input_cost_per_token * 1000000)) || 25,
+      claude_pro: Math.round((livePriceData["claude-3-5-sonnet"]?.input_cost_per_token * 1000000)) || 30,
+      notion_ai: 12, 
+      perplexity_pro: 20,
+      gemini_1_5_pro: Math.round((livePriceData["gemini-1.5-pro"]?.input_cost_per_token * 1000000)) || 7,
+      mistral_large: Math.round((livePriceData["mistral-large-2"]?.input_cost_per_token * 1000000)) || 4,
+      cohere_command_r: Math.round((livePriceData["command-r-plus"]?.input_cost_per_token * 1000000)) || 3,
+      llama_3_70b: Math.round((livePriceData["together_ai/meta-llama/Meta-Llama-3-70B-Instruct"]?.input_cost_per_token * 1000000)) || 1
+    };
+
+    // 3. Self-update the system master metadata table
+    for (const [toolKey, realTimePrice] of Object.entries(latestPricing)) {
+      await supabase
+        .from("pricing_metadata")
+        .update({ 
+          current_price: realTimePrice,
+          updated_at: new Date().toISOString()
+        })
+        .eq("id", toolKey);
+    }
+
+    // 4. Fetch historical audit records from Supabase
+    // Expanded selection query to pull schema data required by the auditEngine input mapping
     const { data: audits, error: fetchError } = await supabase
       .from("audits")
-      .select("id, email, current_tools, recommendations, pricing_snapshot");
+      .select("id, email, current_tools, recommendations, pricing_snapshot, monthly_spend, team_size");
 
     if (fetchError) {
       return NextResponse.json({ error: fetchError.message }, { status: 500 });
     }
 
-    // Key value map to group multiple audit changes under a single email identifier
     const consolidatedEmails: Record<string, string[]> = {};
 
+    // 5. Single, clean iteration loop through all saved audits
     for (const audit of audits) {
       const snapshot = audit.pricing_snapshot;
       let pricingChanged = false;
       const individualAuditChanges: string[] = [];
 
-      // A. Check if explicit tool prices changed from the saved snapshot
+      // A. Check for raw tool baseline market pricing deviations
       for (const key in latestPricing) {
         const pricingKey = key as keyof typeof latestPricing;
-        const oldPrice = snapshot?.[pricingKey];
-        const newPrice = latestPricing[pricingKey];
+        
+        const oldPrice = snapshot?.[pricingKey] !== undefined ? Number(snapshot[pricingKey]) : null;
+        const newPrice = Number(latestPricing[pricingKey]);
 
-        if (oldPrice !== newPrice) {
+        if (oldPrice !== null && oldPrice !== newPrice) {
           pricingChanged = true;
           individualAuditChanges.push(
-            `${pricingKey} shifted from $${oldPrice ?? 0} → $${newPrice}`
+            `${pricingKey} shifted from $${oldPrice} → $${newPrice}`
           );
         }
       }
 
-      // B. Check if your recommendation logic engine would now produce a different choice
-      const freshRec = calculateRecommendation(audit.current_tools, latestPricing);
+      // B. Structure payload dynamically for your imported generateAudit Engine
+      const auditInput = {
+        tool: audit.current_tools?.[0] || "ChatGPT", 
+        plan: audit.recommendations?.recommendedPlan || "enterprise", 
+        monthlySpend: Number(audit.monthly_spend) || 100,
+        teamSize: Number(audit.team_size) || 5,
+        useCase: "development"
+      };
+
+      // 🚀 Run the calculations using your imported engine file logic
+      const freshAuditResult = generateAudit(auditInput, latestPricing);
       
-      // Checking if the new recommended tool string matches what was saved in the recommendations JSONB
-      const originalRecTool = audit.recommendations?.recommended_tool;
-      const recChanged = originalRecTool !== freshRec.recommended_tool;
+      // Look at changes by comparing recommendation records
+      const originalRecTool = audit.recommendations?.recommendedTool || audit.recommendations?.recommended_tool;
+      const recChanged = originalRecTool !== freshAuditResult.recommendedTool;
 
       if (recChanged) {
         individualAuditChanges.push(
-          `Optimal strategy shifted from ${originalRecTool || "None"} → ${freshRec.recommended_tool}`
+          `Optimal platform strategy evolved from ${originalRecTool || "None"} → ${freshAuditResult.recommendedTool} (${freshAuditResult.recommendedPlan})`
         );
       }
 
-      // If either check triggers true, update this specific row and track changes
+      // C. Commit database alterations if changes were detected
       if (pricingChanged || recChanged) {
         await supabase
           .from("audits")
           .update({ 
             pricing_changed: pricingChanged,
             recommendation_changed: recChanged,
+            estimated_savings: freshAuditResult.estimatedSavings,
+            recommendations: freshAuditResult, // Update the cell with the full generated audit JSON
             last_checked: new Date().toISOString()
           })
           .eq("id", audit.id);
 
-        // Fallback target: check 'email' first, then 'user_email' field
         const recipientEmail = audit.email; 
-        
         if (recipientEmail) {
           if (!consolidatedEmails[recipientEmail]) {
             consolidatedEmails[recipientEmail] = [];
@@ -91,14 +118,14 @@ export async function POST(request: Request) {
       }
     }
 
-    // Send exactly ONE consolidated alert per unique user
+    // 6. Dispatch consolidated email notifications
     for (const [email, changesArray] of Object.entries(consolidatedEmails)) {
       await fetch(`${origin}/api/send-pricing-alert`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: email,
-          reportUrl: `${origin}`,
+          reportUrl: origin,
           changes: changesArray,
         }),
       });
@@ -106,6 +133,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ 
       success: true, 
+      livePricingPulled: latestPricing,
       processedCount: audits.length, 
       emailsDispatched: Object.keys(consolidatedEmails).length 
     });
