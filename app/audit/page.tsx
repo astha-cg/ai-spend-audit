@@ -198,15 +198,24 @@ useEffect(() => {
     useCase,
     };
 
-    localStorage.setItem(
-        "audit-data",
-        JSON.stringify(auditData)
-    );
 
+    // 1. Check if there is an existing audit from a previous run
+    const existingAudit = localStorage.getItem("audit-data");
+    
+    if (existingAudit) {
+      // 2. Cycle it back into the historical storage slot
+      localStorage.setItem("previous-audit-data", existingAudit);
+    }
+
+    // 3. Save the brand new form inputs into the active slot
+    localStorage.setItem("audit-data", JSON.stringify(auditData));
+
+    // 4. Safely route over to your results presentation matrix
     router.push("/results");
-    }}
-        className="mt-6 rounded-full bg-green-400 px-10 py-5 text-lg font-medium text-black shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-green-300 active:scale-[0.98]">
-    Analyze My AI Spend
+  }}
+  className="mt-6 rounded-full bg-green-400 px-10 py-5 text-lg font-medium text-black shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-green-300 active:scale-[0.98]"
+>
+  Analyze My AI Spend
     </button>
 
   </div>

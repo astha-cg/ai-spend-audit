@@ -21,10 +21,21 @@ export default function ResultsPage() {
   const [auditId] = useState(() => Math.random().toString(36).substring(2, 10));
   const [networkTimeout, setNetworkTimeout] = useState(false);
 
-  useEffect(() => {
+useEffect(() => {
     async function executeAuditPipeline() {
       try {
-        // 1. Instantly extract current active audit cache to prevent page hanging
+        // 1. Instantly pull historical data BEFORE anything else overwrites it
+        const historicalData = localStorage.getItem("previous-audit-data");
+        let parsedHistorical: any = null;
+        if (historicalData) {
+          try {
+            parsedHistorical = JSON.parse(historicalData);
+          } catch (e) {
+            console.error("Error reading historical audit logs:", e);
+          }
+        }
+
+        // 2. Extract current active audit cache
         const savedData = localStorage.getItem("audit-data");
         if (!savedData) {
           console.log("No audit data found");
@@ -34,27 +45,18 @@ export default function ResultsPage() {
         const parsedData = JSON.parse(savedData);
         setFormData(parsedData);
 
-        // 2. Extract Historical Run for the Comparison Matrix
-        const historicalData = localStorage.getItem("previous-audit-data");
-        let parsedHistorical: any = null;
-        if (historicalData) {
-          try {
-            parsedHistorical = JSON.parse(historicalData);
-            setPreviousAudit(parsedHistorical);
-          } catch (e) {
-            console.error("Error reading historical audit logs:", e);
-          }
+        // 3. Only cycle the current cache into history slot if they are genuinely different
+        // This prevents a simple page refresh from wiping out your comparison state!
+        if (JSON.stringify(parsedHistorical) !== JSON.stringify(parsedData)) {
+          localStorage.setItem("previous-audit-data", JSON.stringify(parsedData));
         }
 
-        // Cycle the current cache onward into the history slot for subsequent re-runs
-        localStorage.setItem("previous-audit-data", JSON.stringify(parsedData));
-
-        // 3. Resolve Auth Context (Non-blocking background pass)
+        // 4. Resolve Auth Context (Non-blocking background pass)
         supabase.auth.getUser().then(({ data }) => {
           if (data?.user) setUser(data.user);
         });
 
-        // 4. Pull Dynamic Market Rates with a 3-second fail-safe network race timeout
+        // 5. Pull Dynamic Market Rates with a 3-second fail-safe network race timeout
         let latestPricing: Record<string, number> = {
           openai_gpt4: 25,
           claude_pro: 30,
@@ -76,7 +78,7 @@ export default function ResultsPage() {
           setNetworkTimeout(true);
         }
 
-        // 5. Compute Active Optimization Metrics instantly
+        // 6. Compute Active Optimization Metrics instantly
         const auditResult = generateAudit(
           {
             tool: parsedData.tool,
@@ -89,7 +91,7 @@ export default function ResultsPage() {
         );
         setResult(auditResult);
 
-        // Build historical calculation metrics branch if history is present
+        // 7. Process Historical Matrix Branch using local parsed reference directly
         if (parsedHistorical) {
           const pastResult = generateAudit(
             {
@@ -101,10 +103,15 @@ export default function ResultsPage() {
             },
             latestPricing
           );
-          setPreviousAudit((prev: any) => ({ ...prev, calculatedResult: pastResult }));
+          
+          // Hydrate the full state payload including calculated metrics context cleanly
+          setPreviousAudit({
+            ...parsedHistorical,
+            calculatedResult: pastResult
+          });
         }
 
-        // 6. Decoupled AI Generation Request (Asynchronous background thread operation)
+        // 8. Decoupled AI Generation Request
         fetch("/api/generate-summary", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -118,7 +125,6 @@ export default function ResultsPage() {
           .then((summaryData) => {
             setSummary(summaryData.summary || "Audit optimization analysis completed successfully.");
             
-            // Persist parameters safely after rendering frames decouple
             saveAudit({
               email: user?.email || summaryData.user?.email || "anonymous@example.com",
               currentTools: [{ tool: parsedData.tool, plan: parsedData.plan }],

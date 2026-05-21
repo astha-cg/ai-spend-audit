@@ -18,6 +18,7 @@ type AuditResult = {
 export function generateAudit(
   input: AuditInput,
   latestPricing: Record<string, number> // 🚀 INJECT LIVE METADATA PRICING DIRECTLY HERE
+  
 ): AuditResult {
   const { tool, plan, monthlySpend, teamSize } = input;
 
