@@ -1,5 +1,3 @@
-## ROUND2_DEVLOG
-
 ## Day Overview
 Today’s development cycle focused on transforming Spendit from a simple AI savings calculator into a persistent AI optimization platform capable of historical tracking, pricing intelligence, automated alerts, and re-audit workflows.
 

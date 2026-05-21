@@ -234,4 +234,4 @@ This phase introduced many real SaaS engineering concerns including:
 * comparison engines
 * backend orchestration
 
-By the end of the round, Spendit felt significantly closer to a production-ready optimization platform with long-term scalability po
+By the end of the round, Spendit felt significantly closer to a production-ready optimization platform with long-term scalability potential.
