@@ -4,6 +4,7 @@ import jsPDF from "jspdf";
 import { useEffect, useState } from "react";
 import { generateAudit } from "@/lib/auditEngine";
 import { supabase } from "@/lib/supabase";
+import { saveAudit } from "@/lib/saveAudit";
 
 export default function ResultsPage() {
   const [user, setUser] = useState<any>(null);
@@ -70,17 +71,60 @@ export default function ResultsPage() {
       );
       const data = await response.json();
       setSummary(data.summary);
+      const pricingSnapshot = {
+  ChatGPT: {
+    free: 0,
+    plus: 20,
+    team: 30,
+    enterprise: 60,
+  },
+
+  Claude: {
+    pro: 20,
+    team: 30,
+  },
+
+  Cursor: {
+    pro: 20,
+    business: 40,
+  },
+
+  Notion: {
+    plus: 10,
+    business: 20,
+  },
+};
+
+await saveAudit({
+  email:
+    data.user?.email ||
+    "anonymous@example.com",
+
+  currentTools: [
+    {
+      tool: parsedData.tool,
+      plan: parsedData.plan,
+    },
+  ],
+
+  recommendations: [
+    {
+      recommendedTool:
+        auditResult.recommendedTool,
+      recommendedPlan:
+        auditResult.recommendedPlan,
+      reason: auditResult.reason,
+    },
+  ],
+
+  monthlySpend: Number( parsedData.monthlySpend),
+  estimatedSavings:
+    auditResult.estimatedSavings,
+    pricingSnapshot,
+    });
       // Save to Supabase
 
-      await supabase.from("audits").insert([
-        {
-          company: parsedData.tool,
-
-          team_size: Number(parsedData.teamSize),
-
-          savings: auditResult.estimatedSavings,
-        },
-      ]);
+     
     } catch (error) {
       console.error(error);
       setSummary(

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { aiTools } from "@/data/tools";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { saveAudit } from "@/lib/saveAudit";
 
 export default function AuditPage() {
     const router = useRouter();
@@ -19,6 +20,7 @@ export default function AuditPage() {
   const [seats, setSeats] = useState("");
   const [email, setEmail] =
   useState("");
+
 
 
   useEffect(() => {
@@ -49,6 +51,7 @@ useEffect(() => {
     setUseCase(parsed.useCase || "");
   }
 }, []);
+
 
   return (
 

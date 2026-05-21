@@ -6,14 +6,36 @@ import { supabase } from "@/lib/supabase";
 export default function Dashboard() {
 
   const [user, setUser] = useState<any>(null);
+  const [audits, setAudits] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const { data: userData } = await supabase.auth.getUser();
+      const user = userData.user;
+      setUser(user);
 
-    supabase.auth.getUser().then(({ data }) => {
-      setUser(data.user);
-    });
+      if (user?.email) {
+        const { data, error } = await supabase
+          .from("audits")
+          .select("*")
+          .eq("email", user.email)
+          .order("created_at", { ascending: false });
 
+        if (error) {
+          console.error(error);
+        } else {
+          setAudits(data ?? []);
+        }
+      }
+
+      setLoading(false);
+    };
+
+    fetchData();
   }, []);
+
+  console.log(audits);
 
   return (
     <main className="min-h-screen bg-[#050816] p-10 text-white">
